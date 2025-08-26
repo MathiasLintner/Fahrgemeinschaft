@@ -76,3 +76,12 @@ input, select {
   border-radius: 8px;
   width: min(420px, 100%);
 }
+
+/* Delete-Button */
+button.danger {
+  background: linear-gradient(180deg, #f87171, #ef4444);
+  box-shadow: 0 2px 0 #b91c1c, 0 6px 12px rgba(0,0,0,.15);
+}
+button.danger:hover { filter: brightness(1.05); }
+button.danger:active { transform: translateY(1px); }
+

@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Fahrt abfragen</h1>
-  <p>
+  <p class="actions">
     <a href="/fahrten"><button>Fahrtenübersicht</button></a>
     <a href="/fahrten/anlegen"><button>Fahrt anlegen</button></a>
   </p>
@@ -21,14 +21,25 @@
   <hr>
   <% if (fahrten && fahrten.length) { %>
     <table border="1" cellpadding="6">
-      <tr><th>Start</th><th>Ziel</th><th>Plätze</th><th>Datum</th><th>Preis</th></tr>
+      <tr>
+        <th>Start</th><th>Ziel</th><th>Plätze</th><th>Datum</th><th>Distanz (km)</th><th>Preis (€)</th><th>Gebäck</th>
+        <th>Aktion</th>
+      </tr>
       <% fahrten.forEach(f => { %>
         <tr>
           <td><%= f.start %></td>
           <td><%= f.ziel %></td>
           <td><%= f.plaetze %></td>
           <td><%= f.datum || '' %></td>
-          <td><%= (f.preis || '') %></td>
+          <td><%= (typeof f.distanz === 'number' ? f.distanz.toFixed(1) : '') %></td>
+          <td><%= (typeof f.preis === 'number' ? f.preis.toFixed(2) : '') %></td>
+          <td><%= f.gebaeckErlaubt ? 'Ja' : 'Nein' %></td>
+          <td>
+            <form method="post" action="/fahrten/<%= f.id %>/loeschen" style="display:inline"
+                  onsubmit="return confirm('Wirklich löschen?');">
+              <button class="danger">Löschen</button>
+            </form>
+          </td>
         </tr>
       <% }) %>
     </table>

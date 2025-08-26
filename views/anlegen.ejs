@@ -1,3 +1,4 @@
+<!-- myExpressApp/views/anlegen.ejs -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
   <h1>Fahrt anlegen</h1>
-  <p>
+  <p class="actions">
     <a href="/fahrten"><button>Fahrtenübersicht</button></a>
     <a href="/fahrten/abfragen"><button>Fahrt abfragen</button></a>
   </p>
@@ -19,8 +20,50 @@
     <label>Ziel: <input name="ziel" required></label><br>
     <label>Plätze: <input name="plaetze" type="number" min="1" value="1"></label><br>
     <label>Datum: <input name="datum" type="date"></label><br>
-    <label>Preis: <input name="preis" type="number" step="0.01"></label><br>
+    <label>Uhrzeit: <input name="uhrzeit" type="time"></label><br>
+
+    <label>Distanz (km): <input id="distanz" name="distanz" type="number" step="0.1" min="0" placeholder="z.B. 12.5"></label><br>
+
+    <!-- Preis nur Anzeige -->
+    <label>Preis (berechnet): 
+      <input id="preisAnzeige" type="text" value="0.00 €" readonly>
+    </label><br>
+
+    <!-- NEU: Toggle-Button für Gebäck -->
+    <input type="hidden" name="gebaeck" id="gebaeck" value="false">
+    <div style="margin:8px 0;">
+      <button type="button" id="gebaeckBtn" class="ghost">Gebäck: Nein</button>
+      <small style="margin-left:8px; color:#555;">(anklicken zum Umschalten)</small>
+    </div>
+
     <button type="submit">Speichern</button>
   </form>
+
+  <script>
+    (function () {
+      var kmPreis = Number(<%= typeof preisProKm !== 'undefined' ? preisProKm : 0.5 %>) || 0.5;
+      var distanz = document.getElementById('distanz');
+      var preisOut = document.getElementById('preisAnzeige');
+      function updatePreis() {
+        var km = parseFloat(distanz.value || '0') || 0;
+        var preis = (km * kmPreis).toFixed(2) + ' €';
+        preisOut.value = preis;
+      }
+      distanz.addEventListener('input', updatePreis);
+      updatePreis();
+
+      // Toggle "Gebäck erlaubt" via Button
+      var flag = false;
+      var btn = document.getElementById('gebaeckBtn');
+      var hidden = document.getElementById('gebaeck');
+      function updateToggle(){
+        btn.textContent = 'Gebäck: ' + (flag ? 'Ja' : 'Nein');
+        hidden.value = flag ? 'true' : 'false';
+        if (flag) btn.classList.add('light'); else btn.classList.remove('light');
+      }
+      btn.addEventListener('click', function(){ flag = !flag; updateToggle(); });
+      updateToggle();
+    })();
+  </script>
 </body>
 </html>
