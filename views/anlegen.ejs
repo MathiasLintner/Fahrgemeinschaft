@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h1>Fahrt anlegen</h1>
+  <p>
+    <a href="/fahrten"><button>Fahrtenübersicht</button></a>
+    <a href="/fahrten/abfragen"><button>Fahrt abfragen</button></a>
+  </p>
+  <hr>
+
+  <% if (info) { %><p style="color:green"><%= info %></p><% } %>
+
+  <form method="post" action="/fahrten/anlegen">
+    <label>Start: <input name="start" required></label><br>
+    <label>Ziel: <input name="ziel" required></label><br>
+    <label>Plätze: <input name="plaetze" type="number" min="1" value="1"></label><br>
+    <label>Datum: <input name="datum" type="date"></label><br>
+    <label>Preis: <input name="preis" type="number" step="0.01"></label><br>
+    <button type="submit">Speichern</button>
+  </form>
+</body>
+</html>

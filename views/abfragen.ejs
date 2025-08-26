@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h1>Fahrt abfragen</h1>
+  <p>
+    <a href="/fahrten"><button>Fahrtenübersicht</button></a>
+    <a href="/fahrten/anlegen"><button>Fahrt anlegen</button></a>
+  </p>
+  <hr>
+
+  <form method="get" action="/fahrten/abfragen">
+    <label>Start: <input name="start" value="<%= start %>"></label>
+    <label>Ziel: <input name="ziel" value="<%= ziel %>"></label>
+    <button type="submit">Suchen</button>
+  </form>
+
+  <hr>
+  <% if (fahrten && fahrten.length) { %>
+    <table border="1" cellpadding="6">
+      <tr><th>Start</th><th>Ziel</th><th>Plätze</th><th>Datum</th><th>Preis</th></tr>
+      <% fahrten.forEach(f => { %>
+        <tr>
+          <td><%= f.start %></td>
+          <td><%= f.ziel %></td>
+          <td><%= f.plaetze %></td>
+          <td><%= f.datum || '' %></td>
+          <td><%= (f.preis || '') %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else { %>
+    <p>Keine Ergebnisse (bitte Suchfelder ausfüllen).</p>
+  <% } %>
+</body>
+</html>

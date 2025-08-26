@@ -1,0 +1,78 @@
+/* ===== Basis ===== */
+* { box-sizing: border-box; }
+body { 
+  font-family: Arial, sans-serif; 
+  max-width: 900px; 
+  margin: 24px auto; 
+  line-height: 1.4; 
+  background: #f6f9ff;
+  color: #1f2937;
+}
+a { text-decoration: none; color: #1d4ed8; }
+
+/* ===== Button-Styles ===== */
+button {
+  appearance: none;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #4f8df5, #2d6be0); /* hell → dunkel blau */
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: .2px;
+  box-shadow: 0 2px 0 #1f4bb8, 0 6px 12px rgba(0,0,0,.15);
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s ease, filter .2s ease, background .2s ease;
+}
+button:hover {
+  filter: brightness(1.05);
+}
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #1f4bb8, 0 3px 8px rgba(0,0,0,.20);
+}
+button:focus {
+  outline: 3px solid #93c5fd;      /* blauer Fokus-Ring */
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Varianten (optional: wenn du Klassen verwenden willst) */
+button.ghost {
+  background: transparent;
+  color: #1d4ed8;
+  border: 2px solid #93c5fd;
+  box-shadow: none;
+}
+button.light {
+  background: linear-gradient(180deg, #9ec5ff, #6aa6ff);
+  color: #0b225a;
+}
+
+/* Abstand zwischen Buttons */
+button + button { margin-left: 8px; }
+
+/* ===== Layout-Helfer für deine Action-Buttons ===== */
+.actions { 
+  display: flex; 
+  gap: 8px; 
+  flex-wrap: wrap; 
+  margin: 12px 0 16px; 
+}
+
+/* ===== Tabellen & Formular minimal aufhübschen ===== */
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+th { background: #e8f0ff; color: #0b225a; }
+tr:last-child td { border-bottom: 0; }
+
+label { display: block; margin: 8px 0; }
+input, select {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  width: min(420px, 100%);
+}
