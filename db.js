@@ -12,7 +12,7 @@ try { fs.mkdirSync(dbDir, { recursive: true }); } catch (e) {}
 
 const storagePath = process.env.SQLITE_PATH || path.join(dbDir, 'app.db');
 
-// Falls du später eine Cloud-DB nutzen willst, setze DATABASE_URL und DIALECT
+
 const hasCloudDb = !!process.env.DATABASE_URL;
 const sequelize = hasCloudDb
   ? new Sequelize(process.env.DATABASE_URL, {
@@ -26,3 +26,4 @@ const sequelize = hasCloudDb
     });
 
 module.exports = { sequelize };
+
